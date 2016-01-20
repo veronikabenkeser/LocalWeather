@@ -8,7 +8,6 @@ $(document).ready(function() {
 });
 
 function getWeather(callback) {
-
   $.ajaxPrefilter(function(options) {
     if (options.crossDomain && jQuery.support.cors && options.url === "http://www.ipaddresslocation.org/ip-address-locator.php") {
       var http = (window.location.protocol === 'http:' ? 'http:' : 'https:');
@@ -16,7 +15,6 @@ function getWeather(callback) {
     }
   });
 
-  //Scan this website to find out this computer's city, state, lng, long
   $.get(
     'http://www.ipaddresslocation.org/ip-address-locator.php',
 
@@ -50,7 +48,6 @@ function showLoc(city, state, lat, lng) {
     includeLocation: "yes"
   };
 
-  //Use an API to get the weather
   var timeout;
   $.ajax({
 
@@ -76,15 +73,10 @@ function showLoc(city, state, lat, lng) {
       var windMph = data.data.current_condition[0].windspeedMiles;
       var windDirection = data.data.current_condition[0].winddir16Point;
       var verbalDesc = data.data.current_condition[0].weatherDesc[0].value;
-      //Show information
-      //Wind
+
       $("#wind").text("Wind: " + windMph);
       $("#wind").append(" " + windDirection);
-
-      //verbal description
       $("#verbalDesc").text(verbalDesc);
-
-      //Icon
       $('#iconDiv').append($('<img>', {
         src: pickIcon(verbalDesc),
         width: 80,
@@ -92,8 +84,6 @@ function showLoc(city, state, lat, lng) {
         alt: "Weather Icon",
         title: "Weather Icon"
       }));
-
-      //show temperature
       $("#temperature").text(temperature);
       $("#degree").text("F");
     },
@@ -110,7 +100,6 @@ function showLoc(city, state, lat, lng) {
 function pickIcon(str) {
   var fog = /fog/ig;
   var sunny = /sunny|clear/ig;
-
   var rain = /sleet|rain|mist|drizzle/ig;
   var partlycloudy = /partly\s*cloudy/ig;
   var cloudy = /cloudy/ig;
@@ -121,28 +110,36 @@ function pickIcon(str) {
   if (fog.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/Z2QPO2P485_zpscnygt6fh.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/weather_fog_zpslzgcirkq.png";
-  } else if (sunny.test(str)) {
+  }
+  else if (sunny.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/ONV344KX9K_zpszeg0nw3z.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/weather_clear_zpsiabsmpgx.png";
-  } else if (rain.test(str)) {
+  }
+  else if (rain.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/45JIYYO371_zpsjfcyoj7u.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/drizzle_zps1yelmy4d.png";
-  } else if (partlycloudy.test(str)) {
+  }
+  else if (partlycloudy.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/IUVI2VVDXJ_zpsh1zbooij.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/weather_few_clouds_zps15rdcb8r.png";
-  } else if (cloudy.test(str)) {
+  }
+  else if (cloudy.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/RJJ90FDT8W1_zpsrmayyrhq.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/cloudy_sky_zpsxhy1bryx.png";
-  } else if (overcast.test(str)) {
+  }
+  else if (overcast.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/RJJ90FDT8W1_zpsrmayyrhq.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/overcast_sky_zpswnawzqgi.png";
-  } else if (snow.test(str)) {
+  }
+  else if (snow.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/XC9DW4IKVT_zps7unklljz.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/weather_snow_zpsg8xvcn2s.png";
-  } else if (thunder.test(str)) {
+  }
+  else if (thunder.test(str)) {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/KLUGGEFXJ2_zpsi0zww9k5.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/weather_128_zpsolzwf8ov.png";
-  } else {
+  }
+  else {
     $("html").css("background", 'url("http://i358.photobucket.com/albums/oo27/picturesqueworlds/IUVI2VVDXJ_zpsh1zbooij.jpg")' + "no-repeat center center fixed");
     return "http://i358.photobucket.com/albums/oo27/picturesqueworlds/cloudy_sky_zpsxhy1bryx.png";
   }
@@ -153,7 +150,8 @@ function switchDeg(currentD) {
   if (currentD === "F") {
     $("#temperature").text(((temp - 32) * (5 / 9)).toFixed(0));
     $("#degree").text("C");
-  } else {
+  }
+  else {
     $("#temperature").text((temp * 9 / 5 + 32).toFixed(0));
     $("#degree").text("F");
   }
