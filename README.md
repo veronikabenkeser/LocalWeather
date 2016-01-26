@@ -1,6 +1,7 @@
+<h1>Local Weather App</h1>
 This project was built as a part of Free Code Camp's Intermediate Front-End Development curriculum.
 
-User stories:
+<h2>User stories<h2>
 
 1. As a user, I can see the weather in my current location. 
 2. As a user, I can see an icon depending on the temperature. 
