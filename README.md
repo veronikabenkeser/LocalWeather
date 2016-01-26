@@ -1,5 +1,5 @@
 <h1>Local Weather App</h1>
-This project was built as a part of Free Code Camp's Intermediate Front-End Development curriculum.
+This project was built as a part of Free Code Camp's Front-End Development curriculum.
 
 <h2>User stories</h2>
 
